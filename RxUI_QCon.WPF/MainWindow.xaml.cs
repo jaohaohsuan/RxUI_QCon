@@ -21,11 +21,11 @@ namespace RxUI_QCon
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IViewFor<MainWindowViewModel>
+    public partial class MainWindow : UserControl, IViewFor<MainWindowViewModel>
     {
         public MainWindow()
         {
-            ViewModel = new MainWindowViewModel();
+            //ViewModel = new MainWindowViewModel();
             InitializeComponent();
 
             this.Bind(ViewModel, x => x.Red);

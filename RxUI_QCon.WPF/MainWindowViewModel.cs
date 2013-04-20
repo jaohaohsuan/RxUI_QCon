@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Media;
 using ReactiveUI;
+using ReactiveUI.Routing;
 using ReactiveUI.Xaml;
 using Newtonsoft.Json;
 
@@ -25,7 +26,7 @@ using System.Windows.Media.Imaging;
 
 namespace RxUI_QCon
 {
-    public class MainWindowViewModel : ReactiveObject
+    public class MainWindowViewModel : ReactiveObject, IRoutableViewModel
     {
         int _Red;
         public int Red {
@@ -70,8 +71,9 @@ namespace RxUI_QCon
 
         public ReactiveCommand Ok { get; protected set; }
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IScreen screen)
         {
+            HostScreen = screen;
             var whenAnyColorChanges = this.WhenAny(x => x.Red, x => x.Green, x => x.Blue,
                     (r, g, b) => Tuple.Create(r.Value, g.Value, b.Value))
                 .Select(intsToColor);
@@ -89,7 +91,7 @@ namespace RxUI_QCon
 #if MONO
                 .Select(x => imagesForColor(x.Value))
 #else
-                .Select(x => imagesForColor(x.Color))
+                .Select(x => {return imagesForColor(x.Color);})
 #endif
                 .Switch()
                 .SelectMany(imageListToImages)
@@ -184,5 +186,7 @@ namespace RxUI_QCon
                 }).ToList();
         }
 #endif
+        public string UrlPathSegment { get; private set; }
+        public IScreen HostScreen { get; private set; }
     }
 }

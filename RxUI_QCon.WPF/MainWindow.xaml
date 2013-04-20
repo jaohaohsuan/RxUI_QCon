@@ -1,7 +1,7 @@
-﻿<Window x:Class="RxUI_QCon.MainWindow"
+﻿<UserControl x:Class="RxUI_QCon.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+       >
     <Grid Margin="8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
@@ -45,4 +45,4 @@
 
         <Button x:Name="Ok" Grid.Row="5" Grid.Column="2" MinWidth="75" MinHeight="25" Content="Ok" HorizontalAlignment="Right" VerticalAlignment="Bottom" />
     </Grid>
-</Window>
+</UserControl>
